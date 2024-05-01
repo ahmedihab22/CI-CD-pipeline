@@ -58,7 +58,7 @@ $ git push <repo> develop
 
 ```
 
-### 4. **Installing Jenkins container on EC2:**
+### 2. **Installing Jenkins container on EC2:**
 
 ```bash
 
@@ -83,7 +83,7 @@ $ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 - Copy password to Jenkins tab and sign in
 
 
-### 5. **Configure Jenkins:**
+### 3. **Configure Jenkins:**
    - **Install necessary plugins in Jenkins such as Git and Pipeline.**
    - **Connect Jenkins to GitHub.**
         - Go to "Manage Jenkins" > "Manage Plugins" > "Available" and install "GitHub Integration Plugin".
@@ -96,7 +96,7 @@ $ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
      - In Build Triggers, Check **"GitHub hook trigger for GITScm polling"**.
      - Save
 
-### 6. **Implement Webhooks for Continuous Integration:**
+### 4. **Implement Webhooks for Continuous Integration:**
 **Set up webhooks in GitHub to trigger Jenkins builds on push events.**
 - In GitHub, go to your repository settings and select **"Webhooks"**.
 - **Add a new webhook:**
@@ -107,7 +107,7 @@ $ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
  
 ### **With the webhook, Jenkins will trigger a new build every time changes are pushed to the connected branch.**
 
-### 7. **Testing and Validation:**
+### 5. **Testing and Validation:**
    - Push a change to the `develop` branch and verify Jenkins triggers a build.
    
 - Check the Jenkins dashboard for build status and output.
