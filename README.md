@@ -110,7 +110,7 @@ $ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ### 5. **Testing and Validation:**
    - Push a change to the `develop` branch and verify Jenkins triggers a build.
    
-- Check the Jenkins dashboard for build status and output.
+- Check the Jenkins dashboard for build status and output ....
 
 
 
