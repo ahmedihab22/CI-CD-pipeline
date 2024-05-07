@@ -65,6 +65,11 @@ pipeline {
 pipeline {
     agent any
 
+    tools {
+        // Define Maven installation named 'Maven'
+        maven 'maven'
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -76,7 +81,7 @@ pipeline {
             steps {
                 // Use Maven tool to build the project
                 script {
-                    // This will automatically use the Maven installation defined in Jenkins Global Tool Configuration
+                    // This will automatically use the Maven installation defined above
                     sh 'mvn clean package'
                 }
             }
@@ -90,7 +95,6 @@ pipeline {
                     }
                     steps {
                         // Add your test commands for Windows here
-                        echo 'Running Unit Tests on Windows'
                     }
                 }
                 
@@ -98,9 +102,8 @@ pipeline {
                     when {
                         expression { isUnix() }
                     }
-                    steps { 
+                    steps {
                         // Add your test commands for Linux here
-                        echo 'Running Unit Tests on Linux'
                     }
                 }
             }
@@ -117,6 +120,7 @@ pipeline {
         }
     }
 }
+
 
 
 
