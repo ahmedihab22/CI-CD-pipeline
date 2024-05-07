@@ -32,7 +32,7 @@ def buildImage() {
     withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
         sh ' docker build -t elghetani/jenkins:jma-2.0 .'
         sh " echo $PASSWORD | docker login -u $USERNAME --password-stdin"
-        sh ' docker dpush elghetani/jenkins:jma-2.0'
+        sh ' docker push elghetani/jenkins:jma-2.0'
     }
      }
     catch (err) {                                        
