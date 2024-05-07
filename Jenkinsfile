@@ -21,30 +21,43 @@ pipeline {
     }
 }
 */
-def buildJar() {
-    echo "building the application..."
-    sh 'mvn package'
-} 
+def gv
 
-def buildImage() {
-     try {
-    echo "building the docker image..."
-    withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-        sh ' docker build -t elghetani/jenkins:jma-2.0 .'
-        sh " echo $PASSWORD | docker login -u $USERNAME --password-stdin"
-        sh ' docker push elghetani/jenkins:jma-2.0'
+pipeline {
+    agent any
+    tools {
+        maven 'maven'
     }
-     }
-    catch (err) {                                        
-                unstable(message: "${STAGE_NAME} is unstable")
+    stages {
+        stage("init") {
+            steps {
+                script {
+                    gv = load "script.groovy"
+                }
             }
-} 
-
-def deployApp() {
-    echo 'deploying the application...'
-} 
-
-return this
-
+        }
+        stage("build jar") {
+            steps {
+                script {
+                    gv.buildJar()
+                }
+            }
+        }
+        stage("build image") {
+            steps {
+                script {
+                    gv.buildImage()
+                }
+            }
+        }
+        stage("deploy") {
+            steps {
+                script {
+                    gv.deployApp()
+                }
+            }
+        }
+    }   
+}
 
 
