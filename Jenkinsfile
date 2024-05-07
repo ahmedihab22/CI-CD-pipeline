@@ -74,10 +74,8 @@ pipeline {
         
         stage('Build') {
             steps {
-                script {
-                    sh 'javac -d target/classes src/*.java'
-                    sh 'jar cvf myapp.jar -C target/classes .'
-                }
+                // Use Maven to build the project
+                sh 'mvn clean package'
             }
         }
         
@@ -108,7 +106,8 @@ pipeline {
                 branch 'develop'
             }
             steps {
-                archiveArtifacts artifacts: 'test.jar', fingerprint: true
+                // Archive the built JAR file
+                archiveArtifacts artifacts: '*.jar', fingerprint: true
             }
         }
     }
