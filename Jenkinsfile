@@ -66,7 +66,7 @@ pipeline {
     agent any
 
     tools {
-        // Define Maven installation named 'Maven'
+        // Define Maven installation named 'maven'
         maven 'maven'
     }
 
@@ -81,7 +81,8 @@ pipeline {
             steps {
                 // Use Maven tool to build the project
                 script {
-                 // This will automatically use the Maven installation defined above
+                    // This will automatically use the Maven installation defined above
+                    tool 'maven'
                     sh 'mvn clean package'
                 }
             }
@@ -120,6 +121,7 @@ pipeline {
         }
     }
 }
+
 
 
 
