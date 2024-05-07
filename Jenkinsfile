@@ -87,6 +87,7 @@ pipeline {
                     }
                     steps {
                         // Add your test commands for Windows here
+                        sh 'echo "Running Unit Tests on Windows"'
                     }
                 }
                 
@@ -96,6 +97,7 @@ pipeline {
                     }
                     steps {
                         // Add your test commands for Linux here
+                        sh 'echo "Running Unit Tests on Linux"'
                     }
                 }
             }
