@@ -81,7 +81,7 @@ pipeline {
             steps {
                 // Use Maven tool to build the project
                 script {
-                    // This will automatically use the Maven installation defined above
+                 // This will automatically use the Maven installation defined above
                     sh 'mvn clean package'
                 }
             }
