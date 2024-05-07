@@ -65,6 +65,11 @@ pipeline {
 pipeline {
     agent any
 
+    tools {
+        // Define Maven installation named 'Maven'
+        maven 'Maven'
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -74,8 +79,11 @@ pipeline {
         
         stage('Build') {
             steps {
-                // Use Maven to build the project
-                sh 'mvn clean package'
+                // Use Maven tool to build the project
+                script {
+                    // This will automatically use the Maven installation defined above
+                    sh 'mvn clean package'
+                }
             }
         }
         
@@ -87,7 +95,6 @@ pipeline {
                     }
                     steps {
                         // Add your test commands for Windows here
-                        sh 'echo "Running Unit Tests on Windows"'
                     }
                 }
                 
@@ -97,7 +104,6 @@ pipeline {
                     }
                     steps {
                         // Add your test commands for Linux here
-                        sh 'echo "Running Unit Tests on Linux"'
                     }
                 }
             }
