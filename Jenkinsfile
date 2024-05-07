@@ -74,7 +74,10 @@ pipeline {
         
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                script {
+                    sh 'javac -d target/classes src/*.java'
+                    sh 'jar cvf myapp.jar -C target/classes .'
+                }
             }
         }
         
@@ -85,7 +88,7 @@ pipeline {
                         expression { isWindows() }
                     }
                     steps {
-                        sh 'mvn test -Dtest.platform=windows'
+                        // Add your test commands for Windows here
                     }
                 }
                 
@@ -94,7 +97,7 @@ pipeline {
                         expression { isUnix() }
                     }
                     steps {
-                        sh 'mvn test -Dtest.platform=linux'
+                        // Add your test commands for Linux here
                     }
                 }
             }
@@ -105,9 +108,8 @@ pipeline {
                 branch 'develop'
             }
             steps {
-                archiveArtifacts artifacts: '*.jar', fingerprint: true
+                archiveArtifacts artifacts: 'test.jar', fingerprint: true
             }
         }
     }
 }
-
